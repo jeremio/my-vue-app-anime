@@ -44,18 +44,26 @@ onMounted(() => {
   });
 });
 
-// Nettoyer les instances anime.js lorsque le composant est démonté
+/**
+ * Hook de cycle de vie qui s'exécute lorsque le composant est démonté.
+ * Important pour nettoyer les ressources pour éviter les fuites de mémoire.
+ */
 onUnmounted(() => {
   if (animeScope) {
+    // "revert" arrête et supprime toutes les instances anime.js du scope.
     animeScope.revert();
   }
 });
 
-// Fonction pour faire tourner le logo au clic
+/**
+ * Gestionnaire de clic pour le bouton.
+ * Incrémente le compteur de rotations et appelle la méthode d'animation.
+ */
 const handleClick = () => {
   if (!animeScope) return;
 
   rotations.value += 1;
+  // Utilise la méthode enregistrée dans le scope pour déclencher l'animation.
   animeScope.methods.rotateLogo(rotations.value);
 };
 </script>
@@ -77,6 +85,7 @@ const handleClick = () => {
 .logo {
   height: 6em;
   padding: 1.5em;
+  will-change: transform;
 }
 
 .large.centered.row {
