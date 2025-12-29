@@ -10,7 +10,7 @@ const rotations = ref(0);
 const rootEl = useTemplateRef<HTMLElement>('rootContainer');
 
 // Variable pour stocker le scope d'animation (pas besoin d'être réactive)
-let animeScope: any = null;
+let animeScope: ReturnType<typeof createScope> | null = null;
 
 // Initialiser anime.js lorsque le composant est monté
 onMounted(() => {
@@ -21,7 +21,7 @@ onMounted(() => {
     animate('.logo', {
       scale: [
         { to: 1.25, ease: 'inOut(3)', duration: 200 },
-        { to: 1, ease: spring({ stiffness: 300 }) }
+        { to: 1, ease: spring({ bounce: .7 }) }
       ],
       loop: true,
       loopDelay: 250,
@@ -30,7 +30,7 @@ onMounted(() => {
     // Rendre le logo déplaçable
     createDraggable('.logo', {
       container: [0, 0, 0, 0],
-      releaseEase: spring({ stiffness: 200 })
+      releaseEase: spring({ bounce: .7 })
     });
 
     // Méthode pour faire tourner le logo
