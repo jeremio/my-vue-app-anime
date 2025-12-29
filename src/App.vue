@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, useTemplateRef } from 'vue';
-import { animate, createScope, createSpring, createDraggable } from 'animejs';
+import { animate, createScope, spring, createDraggable } from 'animejs';
 import vueLogo from './assets/vue.svg';
 
 // État pour compter les rotations
@@ -21,7 +21,7 @@ onMounted(() => {
     animate('.logo', {
       scale: [
         { to: 1.25, ease: 'inOut(3)', duration: 200 },
-        { to: 1, ease: createSpring({ stiffness: 300 }) }
+        { to: 1, ease: spring({ stiffness: 300 }) }
       ],
       loop: true,
       loopDelay: 250,
@@ -30,7 +30,7 @@ onMounted(() => {
     // Rendre le logo déplaçable
     createDraggable('.logo', {
       container: [0, 0, 0, 0],
-      releaseEase: createSpring({ stiffness: 200 })
+      releaseEase: spring({ stiffness: 200 })
     });
 
     // Méthode pour faire tourner le logo
