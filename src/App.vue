@@ -16,7 +16,7 @@ let animeScope: ReturnType<typeof createScope> | null = null;
 onMounted(() => {
   if (!rootEl.value) return;
 
-  animeScope = createScope({ root: rootEl.value }).add(scope => {
+  animeScope = createScope({ root: rootEl.value }).add((scope) => {
     // Animation de rebond en boucle
     animate('.logo', {
       scale: [
@@ -34,7 +34,7 @@ onMounted(() => {
     });
 
     // Méthode pour faire tourner le logo
-    scope.add('rotateLogo', (i: number) => {
+    scope?.add('rotateLogo', (i: number) => {
       animate('.logo', {
         rotate: i * 360,
         ease: 'out(4)',
@@ -60,7 +60,7 @@ onUnmounted(() => {
  * Incrémente le compteur de rotations et appelle la méthode d'animation.
  */
 const handleClick = () => {
-  if (!animeScope) return;
+  if (!animeScope?.methods?.rotateLogo) return;
 
   rotations.value += 1;
   // Utilise la méthode enregistrée dans le scope pour déclencher l'animation.
