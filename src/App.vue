@@ -71,7 +71,7 @@ const handleClick = () => {
 <template>
   <div ref="rootContainer">
     <div class="large centered row">
-      <img :src="vueLogo" class="logo vue" alt="Vue logo" />
+      <img :src="vueLogo" class="logo vue" alt="Vue logo" draggable="false" />
     </div>
     <div class="medium row">
       <fieldset class="controls">
